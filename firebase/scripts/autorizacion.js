@@ -9,7 +9,7 @@ auth.onAuthStateChanged(user =>{
         configurarMenu();
     }
 });
-const formaingresar = document.getElementById('formLogin');
+const formaingresar = document.getElementById('formaingresar');
 
 formaingresar.addEventListener('submit', (e)=>{
     e.preventDefault();
