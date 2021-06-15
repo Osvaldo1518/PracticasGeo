@@ -58,6 +58,8 @@ salir.addEventListener('click', (e)=>{
             alert('You have closed the sesion');
     });
 })
+const formaregistrate = document.getElementById('formaregistrate');
+
 formaregistrate.addEventListener('submit',(e)=>{
     e.preventDefault();
 
