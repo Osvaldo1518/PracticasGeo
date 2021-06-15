@@ -1,3 +1,14 @@
+auth.onAuthStateChanged(user =>{
+    console.log(user);
+    if(user){
+      
+        configurarMenu(user);
+
+    }else{
+        
+        configurarMenu();
+    }
+});
 const formaingresar = document.getElementById('formLogin');
 
 formaingresar.addEventListener('submit', (e)=>{
@@ -47,3 +58,29 @@ salir.addEventListener('click', (e)=>{
             alert('You have closed the sesion');
     });
 })
+formaregistrate.addEventListener('submit',(e)=>{
+    e.preventDefault();
+
+    const correo = formaregistrate['rcorreo'].value;
+    const constrasena = formaregistrate['rcontrasena'].value;
+
+    auth.createUserWithEmailAndPassword(correo, constrasena).then( cred => {
+        console.log('se creo el usuario');
+        return db.collection('usuarios').doc(cred.user.uid).set({
+            nombre: formaregistrate['rnombre'].value,
+            telefono: formaregistrate['rtelefono'].value,
+            direccion: formaregistrate['rdireccion'].value
+        
+        });
+    }).then(()=>{
+            $('#registrateModal').modal('hide');
+            formaregistrate.reset();
+            formaregistrate.querySelector('.error').innerHTML='';
+        }).catch(err =>{
+            formaregistrate.querySelector('.error').innerHTML=mensajeError(err.code);
+        })
+    });
+    
+    
+    
+    
